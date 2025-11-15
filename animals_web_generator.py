@@ -7,14 +7,23 @@ def load_data(file_path):
 
 animals_data = load_data('animals_data.json')
 
+with open("animals_template.html", "r") as file:
+    html_page = file.read()
+
+output = ""
 for fox in animals_data:
     name = fox["name"]
     diet = fox["characteristics"]["diet"]
     location = fox["locations"][0]
     type = fox["characteristics"].get("type")
-    print(f"Name: {name}")
-    print(f"Diet: {diet}")
-    print(f"Location: {location}")
+    output += f"Name: {name}\n"
+    output += f"Diet: {diet}\n"
+    output += f"Location: {location}\n"
     if type:
-        print(f"Type: {type}")
-    print()
+        output += f"Type: {type}\n"
+    output += "\n"
+
+new_html = html_page.replace("__REPLACE_ANIMALS_INFO__", output)
+
+with open("animals.html", "w", encoding="utf-8") as f:
+    f.write(new_html)
