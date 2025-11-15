@@ -17,12 +17,14 @@ for fox in animals_data:
     location = fox["locations"][0]
     type = fox["characteristics"].get("type")
     output += '<li class="cards__item">'
-    output += f"Name: {name}<br/>\n"
-    output += f"Diet: {diet}<br/>\n"
-    output += f"Location: {location}<br/>\n"
+    output += f'<div class="card__title">{name}</div>\n'
+    output += '<p class="card__text">'
+    output += f"<strong>Diet:</strong> {diet}<br/>\n"
+    output += f"<strong>Location:</strong> {location}<br/>\n"
     if type:
-        output += f"Type: {type}<br/>\n"
+        output += f"<strong>Type:</strong> {type}<br/>\n"
     output += "\n"
+    output += " </p>"
     output += '</li>'
 
 new_html = html_page.replace("__REPLACE_ANIMALS_INFO__", output)
